@@ -29,3 +29,39 @@ for (let i = 0; i < pieces.length; i++)
     pieceElement.appendChild(descriptionElement);
     pieceElement.appendChild(disponibiliteElement);
 }
+
+// Tri des articles par ordre croissant de prix
+const boutonTrier = document.querySelector(".btn-trier");
+boutonTrier.addEventListener("click", function() {
+    const piecesOrdonnees = Array.from(pieces);
+    piecesOrdonnees.sort(function(a, b) {
+        return a.prix - b.prix;
+    });
+    console.log(piecesOrdonnees);
+});
+// Tri des articles par ordre décroissant de prix
+const boutonTrierDesc = document.querySelector(".btn-trier-desc");
+boutonTrierDesc.addEventListener("click", function() {
+    const piecesOrdonnees = Array.from(pieces);
+    piecesOrdonnees.sort(function(a, b) {
+        return b.prix - a.prix;
+    });
+    console.log(piecesOrdonnees);
+});
+
+// Filtre des articles trop chers
+const boutonFiltrer = document.querySelector(".btn-filtrer-prix");
+boutonFiltrer.addEventListener("click", function() {
+    const piecesFiltrees = pieces.filter(function(piece) {
+        return piece.prix <= 35;
+    });
+    console.log(piecesFiltrees);
+});
+// Filtre des articles sans description
+const boutonFiltrerDescription = document.querySelector(".btn-filtrer-description");
+boutonFiltrerDescription.addEventListener("click", function() {
+    const piecesFiltrees = pieces.filter(function(piece) {
+        return piece.description ?? false;
+    });
+    console.log(piecesFiltrees);
+});
