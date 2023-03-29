@@ -1,7 +1,7 @@
 import { ajoutListenersAvis } from "./avis.js";
 
 // Récupération des pièces depuis le fichier JSON
-const pieces = await fetch('pieces-autos.json').then(pieces => pieces.json());
+const pieces = await fetch('http://localhost:8081/pieces').then(pieces => pieces.json());
 
 // Fonction de création et affichage des articles
 function genererPieces(pieces)
