@@ -1,7 +1,9 @@
-import { ajoutListenersAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
 
 // Récupération des pièces depuis le fichier JSON
 const pieces = await fetch('http://localhost:8081/pieces').then(pieces => pieces.json());
+
+ajoutListenerEnvoyerAvis();
 
 // Fonction de création et affichage des articles
 function genererPieces(pieces)
@@ -14,6 +16,7 @@ function genererPieces(pieces)
 
         const imageElement = document.createElement("img");
         imageElement.src = pieces[i].image;
+        imageElement.title = pieces[i].id;
         const nomElement = document.createElement("h2");
         nomElement.innerText = pieces[i].nom;
         const prixElement = document.createElement("p");
