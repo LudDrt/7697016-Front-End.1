@@ -6,9 +6,17 @@ export function ajoutListenersAvis() {
         const id = event.target.dataset.id;
         const pieceElement = event.target.parentElement;
 
-        const reponse = await fetch(`http://localhost:8081/pieces/${id}/avis`);
-        const avis = await reponse.json();
-
+        let avis = window.localStorage.getItem("avis-" + id);
+        if (avis === null)
+        {
+          const reponse = await fetch(`http://localhost:8081/pieces/${id}/avis`);
+          avis = await reponse.json();
+          const valeurAvis = JSON.stringify(avis);
+          window.localStorage.setItem("avis-" + id, valeurAvis);
+        }
+        else {
+          avis = JSON.parse(avis);
+        }
         const avisElement = document.createElement("p");
         for (let i = 0; i < avis.length; i++) {
            avisElement.innerHTML += `${avis[i].utilisateur} (${avis[i].nbEtoiles}): ${avis[i].commentaire} <br>`;
@@ -38,5 +46,6 @@ export function ajoutListenerEnvoyerAvis() {
       headers: { "Content-Type": "application/json" },
       body: chargeUtile
     });
+    window.localStorage.removeItem("avis-" + nouvelAvis.pieceId);
   });
 }
