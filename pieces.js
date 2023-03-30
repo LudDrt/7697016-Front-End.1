@@ -1,4 +1,4 @@
-import { ajoutListenersAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherGraphiqueAvis } from "./avis.js";
 
 window.localStorage.setItem("nom", "Les Bonnes Pièces !");
 
@@ -161,3 +161,4 @@ boutonMettreAJour.addEventListener("click", function() {
     window.localStorage.removeItem("pieces");
 });
 
+afficherGraphiqueAvis();
